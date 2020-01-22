@@ -1,0 +1,10 @@
+.navbar{
+    display: flex;
+    background-color: lightblue;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.navbar-brand{
+    margin-left: 1rem;
+}
