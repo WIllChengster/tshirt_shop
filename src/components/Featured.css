@@ -1,0 +1,17 @@
+.featured-container{
+    margin: 0 1rem 0 1rem;
+}
+
+.products-container{
+    display: flex;
+}
+
+.product-pic{
+    height: 250px;
+    width: 175px;
+    background-color: gray;
+}
+
+.products > p {
+    text-align: center;
+}
