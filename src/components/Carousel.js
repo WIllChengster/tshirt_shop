@@ -19,13 +19,19 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         height: '100%',
         textAlign: 'center',
-        transition: '1s',
-        transform: 'translateX(100%)',
+        transform: 'translateX(0%)',
 
+    },
+
+    exiting_item: {
+        transition: '1s',
+        transform: 'translateX(-100%);'
     },
     
     incoming_item: {
-        transform: 'translateX(0%)',
+        transition: '1s',
+
+        // transform: 'translateX(0%)',
     }
 
 
@@ -37,11 +43,21 @@ const Carousel = (props) => {
     const classes = useStyles();
     const [slideIndex, switchSlide] = useState(0)
 
+    const [slide1Class, changeSlide1Class] = useState(classes.carousel_item)
+
+    useEffect( () => {
+        setTimeout( () => {
+            changeSlide1Class(`${classes.carousel_item} ${classes.exiting_item}`)
+        }, 1000 )
+    } )
+
+    
+
 
 
     return (
         <div className={classes.carousel}>
-            <Paper className={ `${classes.carousel_item} ${classes.incoming_item} ` }>{words[slideIndex]}</Paper>
+            <Paper className={ slide1Class }>{words[slideIndex]}</Paper>
             {/* <Paper className={classes.carousel_item}>{words[slideIndex]}</Paper> */}
         </div>
     )
