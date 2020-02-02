@@ -1,12 +1,14 @@
 import React from 'react';
-import { Paper } from '@material-ui/core'
-import './Featured.css'
+import Carousel from './Carousel'
+import { Container } from '@material-ui/core'
+
 
 const Featured = () => {
     return(
-        <div className="featured-container" >
-            <Paper></Paper>
-        </div>
+        <Container>
+            <Carousel/>
+        </Container>
+
     )
 }
 
