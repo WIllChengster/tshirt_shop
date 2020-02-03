@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './Navbar'
 import Featured from './Featured';
 import Item from './Item'
 import 'typeface-roboto';
 import './App.css';
+import {CartContext} from '../context/cart-context'
 
-function App() {
+const App = () => {
+
+	const [cart, updateCart] = useState([]);
+
+	
+
 	return (
 		<div>
-			<Navbar/>
-			{/* <Featured/> */}
-			<Item/>
+			<CartContext.Provider value={({cart, updateCart})} >
+				<Navbar/>
+				<Item/>
+			</CartContext.Provider>
+
 		</div>
 	);
 }

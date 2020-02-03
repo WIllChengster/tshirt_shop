@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from '@material-ui/core';
+import AddToCourtButton from './AddToCartButton'
 import tshirt from '../assets/imgs/tshirt.jpeg'
 
 const useStyles = makeStyles( theme => ({
@@ -29,7 +30,8 @@ const Item = () => {
                 </CardContent>
                 <CardActions>
                     <Button size="small" color="primary">Learn More</Button>
-                    <Button size="small" color="primary">Add to Cart</Button>
+                    {/* <Button size="small" color="primary">Add to Cart</Button> */}
+                    <AddToCourtButton item="tshirt" ></AddToCourtButton>
                 </CardActions>
             </Card>
     )

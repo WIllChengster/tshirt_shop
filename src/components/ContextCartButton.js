@@ -17,13 +17,23 @@ const ContextCartButton = () => {
     const cart = useContext(CartContext);
 
     // let cart = this.context;
+    console.log(cart);
 
     return(
-        <IconButton>
-            <Badge badgeContent={cart.length} showZero color="error" >
-                <ShoppingCartIcon className={classes.icon}/>
-            </Badge>
-        </IconButton>
+        <CartContext.Consumer>
+            {
+                ({cart}) => {
+                    console.log(cart);
+                    return  (
+                    <IconButton>
+                        <Badge badgeContent={cart.length} showZero color="error" >
+                            <ShoppingCartIcon className={classes.icon}/>
+                        </Badge>
+                    </IconButton>
+                )}
+            }
+
+        </CartContext.Consumer>
     )
 }
 
