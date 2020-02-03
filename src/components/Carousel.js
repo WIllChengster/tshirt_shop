@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import { Paper } from '@material-ui/core'
-import transitions from '@material-ui/core/styles/transitions';
+// import transitions from '@material-ui/core/styles/transitions';
 
 
 const useStyles = makeStyles(theme => ({

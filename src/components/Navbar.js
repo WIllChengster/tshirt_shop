@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Toolbar, Typography, IconButton, Badge } from '@material-ui/core';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
+import { AppBar, Toolbar, Typography} from '@material-ui/core';
+import ContextCartButton from './ContextCartButton'
 const useStyles = makeStyles( theme => ({
     icon: {
         color: 'white',
@@ -20,11 +19,7 @@ const Navbar = () => {
         <AppBar position="static" >
             <Toolbar>
                 <Typography className={classes.title} variant="h6">T-Shirt shop</Typography>
-                <IconButton>
-                    <Badge badgeContent={0} showZero color="error" >
-                        <ShoppingCartIcon className={classes.icon}/>
-                    </Badge>
-                </IconButton>
+                <ContextCartButton/>
             </Toolbar>
         </AppBar>
     )
