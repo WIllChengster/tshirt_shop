@@ -30,7 +30,6 @@ const Item = () => {
                 </CardContent>
                 <CardActions>
                     <Button size="small" color="primary">Learn More</Button>
-                    {/* <Button size="small" color="primary">Add to Cart</Button> */}
                     <AddToCourtButton item="tshirt" ></AddToCourtButton>
                 </CardActions>
             </Card>

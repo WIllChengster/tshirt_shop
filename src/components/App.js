@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar'
-import Featured from './Featured';
-import Item from './Item'
+import { CartContext } from '../context/cart-context';
+import { Route } from 'react-router-dom';
+
+import Navbar from './Navbar';
+import Item from './Item';
+import Cart from './Cart';
+
 import 'typeface-roboto';
 import './App.css';
-import {CartContext} from '../context/cart-context'
 
 const App = () => {
 
@@ -16,7 +19,15 @@ const App = () => {
 		<div>
 			<CartContext.Provider value={({cart, updateCart})} >
 				<Navbar/>
-				<Item/>
+
+				<Route exact path="/" >
+					<Item/>
+				</Route>
+
+				<Route path="/cart">
+					<Cart/>
+				</Route>
+
 			</CartContext.Provider>
 
 		</div>
