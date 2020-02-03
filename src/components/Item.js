@@ -8,7 +8,7 @@ const useStyles = makeStyles( theme => ({
         maxWidth: 300,
     },
     media: {
-        height: 300
+        height: 200
     }
 }));
 
@@ -21,14 +21,14 @@ const Item = () => {
                 </CardActionArea>
                 <CardContent>
                     <Typography component="h3" >
-                        tshirt
+                        Tshirt
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" >
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, vel!
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" color="primary" >Learn More</Button>
+                    <Button size="small" color="primary">Learn More</Button>
                     <Button size="small" color="primary">Add to Cart</Button>
                 </CardActions>
             </Card>
