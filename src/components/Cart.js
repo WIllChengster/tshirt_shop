@@ -38,6 +38,7 @@ const Cart = () => {
     let CartMap = cart.map( (item, index) => {
         return(
             <Paper evelation={3} key={index} className={classes.cartItem} > 
+                
                 <Typography>{item}</Typography>
             </Paper>
         )

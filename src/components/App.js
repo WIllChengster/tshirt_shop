@@ -3,8 +3,8 @@ import { CartContext } from '../context/cart-context';
 import { Route } from 'react-router-dom';
 
 import Navbar from './Navbar';
-import Item from './Item';
 import Cart from './Cart';
+import ItemGenerator from './ItemGenerator';
 
 import 'typeface-roboto';
 import './App.css';
@@ -21,7 +21,7 @@ const App = () => {
 				<Navbar/>
 
 				<Route exact path="/" >
-					<Item/>
+					<ItemGenerator/>
 				</Route>
 
 				<Route path="/cart">
