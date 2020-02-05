@@ -3,7 +3,7 @@ import { CartContext } from '../context/cart-context';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { Typography, Paper, Grid, Icon, IconButton } from '@material-ui/core'
+import { Typography, Paper, Grid, IconButton } from '@material-ui/core'
 
 
 
@@ -43,11 +43,17 @@ const Cart = () => {
     const classes = useStyles();
     const {cart, updateCart} = useContext(CartContext)
 
+    let deleteItem = (index) => {
+        const cartClone = [...cart];
+        cartClone.splice(index, 1)
+        updateCart( cartClone )
+    }
+
     console.log(cart);
 
     let EmptyCartComponent = <Paper elevation={3} className={classes.cartItem}  >
-        <Typography>Your Cart is empty</Typography>
-        <Typography>Start Shopping!</Typography>
+            <Typography>Your Cart is empty</Typography>
+            <Typography>Start Shopping!</Typography>
         </Paper>
     
     let CartMap = cart.map( (item, index) => {
@@ -61,7 +67,7 @@ const Cart = () => {
                         <Typography>{item.name}</Typography>
                         <div className={classes.itemInfoButtons} >
                             <Typography variant="caption" >Quantity: 1</Typography>
-                            <IconButton>
+                            <IconButton onClick={() => deleteItem(index)} >
                                 <DeleteIcon/>
                             </IconButton>
                         </div>

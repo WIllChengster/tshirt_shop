@@ -3,7 +3,7 @@ import tshirt1 from '../assets/imgs/tshirt.jpeg';
 import troopershirt from '../assets/imgs/trooper-tshirt.jpg';
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Container, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Item from './Item'
 
 
