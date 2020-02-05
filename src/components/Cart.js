@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { CartContext } from '../context/cart-context'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { Typography, Paper } from '@material-ui/core'
+import { Typography, Paper, Grid } from '@material-ui/core'
 
 
 
@@ -20,6 +20,9 @@ const useStyles = makeStyles( theme => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         margin: 'auto'
+    },
+    pic: {
+        height: '100px',
     }
 }))
 
@@ -38,8 +41,14 @@ const Cart = () => {
     let CartMap = cart.map( (item, index) => {
         return(
             <Paper evelation={3} key={index} className={classes.cartItem} > 
-                
-                <Typography>{item}</Typography>
+                <Grid container >
+                    <Grid item>
+                        <img className={classes.pic} src={item.img} />
+                    </Grid>
+                    <Grid item xs={6} >
+                        <Typography>{item.name}</Typography>
+                    </Grid>
+                </Grid>
             </Paper>
         )
     } )
