@@ -38,13 +38,10 @@ const ItemGenerator = (props) => {
     })
 
     return(
-        <Container>
             <Grid container spacing={2} className={classes.root} >
                 {ItemGenerator}
 
             </Grid>
-
-        </Container>
     )
 }
 

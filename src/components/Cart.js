@@ -19,7 +19,8 @@ const useStyles = makeStyles( theme => ({
         width: '70%',
         padding: theme.spacing(2),
         textAlign: 'center',
-        margin: 'auto'
+        margin: 'auto',
+        marginTop: theme.spacing(2),
     },
     pic: {
         height: '100px',
@@ -33,7 +34,7 @@ const Cart = () => {
 
     console.log(cart);
 
-    let EmptyCartComponent = <Paper elevation={3} className={classes.cartItem} >
+    let EmptyCartComponent = <Paper elevation={3} className={classes.cartItem}  >
         <Typography>Your Cart is empty</Typography>
         <Typography>Start Shopping!</Typography>
         </Paper>

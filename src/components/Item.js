@@ -16,7 +16,7 @@ const useStyles = makeStyles( theme => ({
 const Item = (props) => {
     const classes = useStyles();
     return(
-            <Card className={classes.card}>
+            <Card className={classes.card} variant="outlined" >
                 <CardActionArea>
                     <CardMedia className={classes.media} image={props.shirtObj.img}  />
                 </CardActionArea>
