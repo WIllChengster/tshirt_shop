@@ -49,14 +49,47 @@ const Cart = () => {
         updateCart( cartClone )
     }
 
-    console.log(cart);
+    let quantifiedCart = (inputCart) => {
+        const cartOutput = [];
+        for(let i = 0; i < inputCart.length; i++){
+
+             if(cartOutput.length === 0){
+                cartOutput.push({
+                    ...inputCart[i],
+                    quantity: 1,
+                })
+                continue;
+            }
+
+            let itemFound = false;
+            for(let j = 0; j < cartOutput.length; j++){
+                if( inputCart[i].id === cartOutput[j].id ){
+                    cartOutput[j].quantity += 1;
+                    itemFound = true
+                    break;
+                }
+            }
+
+            if( !itemFound ) {
+                cartOutput.push({
+                    ...inputCart[i],
+                    quantity: 1,
+                })
+            }
+            
+        }
+
+        console.log(cartOutput)
+        return cartOutput
+    }
 
     let EmptyCartComponent = <Paper elevation={3} className={classes.cartItem}  >
             <Typography>Your Cart is empty</Typography>
             <Typography>Start Shopping!</Typography>
         </Paper>
     
-    let CartMap = cart.map( (item, index) => {
+    let CartMap = quantifiedCart(cart).map( (item, index) => {
+
         return(
             <Paper evelation={3} key={index} className={classes.cartItem} > 
                 <Grid container >
@@ -66,7 +99,7 @@ const Cart = () => {
                     <Grid item xs={9} className={classes.itemInfo} >
                         <Typography>{item.name}</Typography>
                         <div className={classes.itemInfoButtons} >
-                            <Typography variant="caption" >Quantity: 1</Typography>
+                            <Typography variant="caption" >Quantity: {item.quantity} </Typography>
                             <IconButton onClick={() => deleteItem(index)} >
                                 <DeleteIcon/>
                             </IconButton>

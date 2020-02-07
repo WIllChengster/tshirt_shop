@@ -19,10 +19,12 @@ const ItemGenerator = (props) => {
     const classes = useStyles();
     const tshirtData = [
         {
+            id: 0,
             name: 'default tshirt',
             img: tshirt1,
         },
         {
+            id: 1,
             name: 'trooper tshirt',
             img: troopershirt
         }
