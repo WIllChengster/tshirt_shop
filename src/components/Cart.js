@@ -44,7 +44,7 @@ const Cart = () => {
     const {cart, updateCart} = useContext(CartContext)
 
     let deleteItem = (index) => {
-        const cartClone = [...cart];
+        const cartClone = quantifiedCart(cart);
         cartClone.splice(index, 1)
         updateCart( cartClone )
     }
