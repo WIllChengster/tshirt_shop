@@ -1,10 +1,10 @@
 import React from 'react';
-import tshirt1 from '../assets/imgs/tshirt.jpeg';
-import troopershirt from '../assets/imgs/trooper-tshirt.jpg';
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
 import Item from './Item'
+
+import tshirtData from '../itemData'
 
 
 const useStyles = makeStyles(theme => ({
@@ -17,18 +17,8 @@ const useStyles = makeStyles(theme => ({
 const ItemGenerator = (props) => {
     
     const classes = useStyles();
-    const tshirtData = [
-        {
-            id: 0,
-            name: 'default tshirt',
-            img: tshirt1,
-        },
-        {
-            id: 1,
-            name: 'trooper tshirt',
-            img: troopershirt
-        }
-    ]
+    console.log(tshirtData)
+
 
 
     let ItemGenerator = tshirtData.map((item, index) => {

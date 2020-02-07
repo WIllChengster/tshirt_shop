@@ -8,7 +8,15 @@ const useStyles = makeStyles( theme => ({
         // maxWidth: 300,
     },
     media: {
-        height: 200
+        height: 200,
+        [theme.breakpoints.down('sm')]: {
+            height: 100
+        }
+    },
+    content: {
+        [theme.breakpoints.down('sm')]: {
+            height: 100
+        }
     }
 }));
 
@@ -19,7 +27,7 @@ const Item = (props) => {
                 <CardActionArea>
                     <CardMedia className={classes.media} image={props.shirtObj.img}  />
                 </CardActionArea>
-                <CardContent>
+                <CardContent className={classes.content} >
                     <Typography component="h3" >
                         {props.shirtObj.name}
                     </Typography>
