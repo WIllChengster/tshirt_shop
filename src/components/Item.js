@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
+
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from '@material-ui/core';
 import AddToCourtButton from './AddToCartButton'
 
@@ -20,8 +22,13 @@ const useStyles = makeStyles( theme => ({
     }
 }));
 
+
+
 const Item = (props) => {
     const classes = useStyles();
+    const redirectToItem = () => {
+        props.history.push(`/item/${props.shirtObj.id}`)
+    }
     return(
             <Card className={classes.card} variant="outlined" >
                 <CardActionArea>
@@ -36,11 +43,11 @@ const Item = (props) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" color="primary">Learn More</Button>
+                    <Button onClick={redirectToItem} size="small" color="primary">Learn More</Button>
                     <AddToCourtButton item={props.shirtObj} ></AddToCourtButton>
                 </CardActions>
             </Card>
     )
 }
 
-export default Item
+export default withRouter(Item);

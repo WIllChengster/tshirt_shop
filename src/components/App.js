@@ -7,6 +7,7 @@ import { Container } from '@material-ui/core'
 import Navbar from './Navbar';
 import Cart from './Cart';
 import ItemGenerator from './ItemGenerator';
+import ItemPage from './ItemPage';
 
 import 'typeface-roboto';
 import './App.css';
@@ -39,9 +40,14 @@ const App = () => {
 						<ItemGenerator/>
 					</Route>
 
+					<Route path="/item/:id">
+						<ItemPage/>
+					</Route>
+
 					<Route path="/cart">
 						<Cart/>
 					</Route>
+					
 				</Container>
 
 			</CartContext.Provider>

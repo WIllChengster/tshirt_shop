@@ -17,9 +17,6 @@ const useStyles = makeStyles(theme => ({
 const ItemGenerator = (props) => {
     
     const classes = useStyles();
-    console.log(tshirtData)
-
-
 
     let ItemGenerator = tshirtData.map((item, index) => {
         return( 
