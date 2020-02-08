@@ -44,7 +44,7 @@ const Item = (props) => {
                 </CardContent>
                 <CardActions>
                     <Button onClick={redirectToItem} size="small" color="primary">Learn More</Button>
-                    <AddToCourtButton item={props.shirtObj} ></AddToCourtButton>
+                    <AddToCourtButton size="small" color="primary" item={props.shirtObj} ></AddToCourtButton>
                 </CardActions>
             </Card>
     )

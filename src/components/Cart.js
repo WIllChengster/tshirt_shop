@@ -42,6 +42,7 @@ const Cart = () => {
 
     const classes = useStyles();
     const {cart, updateCart} = useContext(CartContext)
+    console.log(cart);
 
     let deleteItem = (index) => {
         const cartClone = quantifiedCart(cart);

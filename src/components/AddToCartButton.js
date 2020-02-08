@@ -7,7 +7,7 @@ const AddToCartButton = (props) => {
         <CartContext.Consumer>
             {
                 ({cart, updateCart}) => (
-                    <Button size="small" color="primary" onClick={()=>updateCart([...cart, props.item])}>Add to Cart</Button>
+                    <Button {...props} onClick={()=>updateCart([...cart, props.item])}>Add to Cart</Button>
                 )
             }
         </CartContext.Consumer>

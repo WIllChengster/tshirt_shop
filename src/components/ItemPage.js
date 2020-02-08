@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Grid, Typography, Button } from '@material-ui/core';
+import AddToCartButton from './AddToCartButton'
 
 const useStyles = makeStyles((theme) => ({
     w100: {
@@ -26,15 +27,15 @@ const ItemPage = (props) => {
     useEffect( () => {
         getShirtData();
     })
+    
     const getShirtData = () => {
         for(let item of itemData){
-            if(item.id = props.match.params.id){
+            if(item.id === Number(props.match.params.id)){
                 setShirt(item);
             }
         }
     }
 
-    console.log(shirt);
     return(
         <Grid container >
             <Grid item xs={6} >
@@ -46,7 +47,8 @@ const ItemPage = (props) => {
                     {shirt.name}
                 </Typography>
                 <div>
-                    <Button variant="contained" color="primary" size="large" >Add to Cart</Button>
+                    {/* <Button variant="contained" color="primary" size="large" >Add to Cart</Button> */}
+                    <AddToCartButton variant="contained" size="large" color="primary" item={shirt} />
                 </div>
             </Grid>
         </Grid>

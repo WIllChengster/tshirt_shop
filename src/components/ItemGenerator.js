@@ -19,8 +19,9 @@ const ItemGenerator = (props) => {
     const classes = useStyles();
 
     let ItemGenerator = tshirtData.map((item, index) => {
+        console.log(item);
         return( 
-            <Grid item xs={3} key={index}>
+            <Grid item xs={3} key={`shirt ${index}`}>
                 <Item shirtObj={item} />
             </Grid>
         )
