@@ -13,7 +13,9 @@ const useStyles = makeStyles( theme => ({
         textAlign: 'center'
     },
     cartContainer: {
-        // display: 'flex',
+        display: 'flex',
+        flexDirection:'column',
+        width: '100%',
         justifyContent: 'center',
         marginTop: theme.spacing(6),
     },
@@ -36,6 +38,10 @@ const useStyles = makeStyles( theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'baseline'
+    },
+    checkoutButton: {
+        backgroundColor: 'green',
+        margin: 'auto',
     }
 }))
 
@@ -112,12 +118,14 @@ const Cart = () => {
     } )
 
     
+    let CheckoutButton = cart.length > 0 ? <Button className={classes.checkoutButton} component={Link} to="/checkout" variant="contained" size="large" color="primary" >Checkout</Button> : <div/>
+
     let UserCart = cart.length > 0 ? CartMap : EmptyCartComponent
 
     return(
         <div>
-            <Typography className={classes.header} component="h3" >My Cart</Typography>
             <div className={classes.cartContainer}>
+                {CheckoutButton}
                 {UserCart}
             </div>
         </div>

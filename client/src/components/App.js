@@ -8,6 +8,7 @@ import Navbar from './Navbar';
 import Cart from './Cart';
 import ItemGenerator from './ItemGenerator';
 import ItemPage from './ItemPage';
+import Checkout from './Checkout'
 
 
 import 'typeface-roboto';
@@ -47,6 +48,10 @@ const App = () => {
 
 					<Route path="/cart">
 						<Cart/>
+					</Route>
+
+					<Route path="/checkout">
+						<Checkout/>
 					</Route>
 					
 				</Container>
