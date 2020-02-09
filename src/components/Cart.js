@@ -44,7 +44,6 @@ const Cart = () => {
     const {cart, updateCart} = useContext(CartContext)
 
     let deleteItem = (index) => {
-        debugger;
         const cartClone = cart.slice();
         cartClone.splice(index, 1);
         console.log(cartClone)
@@ -55,8 +54,6 @@ const Cart = () => {
     let quantifiedCart = (inputCart) => {
         const cartOutput = [];
         for(let i = 0; i < inputCart.length; i++){
-            debugger;
-
              if(cartOutput.length === 0){
                 cartOutput.push({
                     ...inputCart[i],
