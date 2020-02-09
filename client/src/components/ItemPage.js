@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import itemData from '../itemData';
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios'
 
-import { Grid, Typography, Button } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import AddToCartButton from './AddToCartButton'
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,9 @@ const ItemPage = (props) => {
 
     useEffect( () => {
         getShirtData();
+        axios.get('/test').then(res => {
+            console.log(res);
+        })
     })
     
     const getShirtData = () => {
