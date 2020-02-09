@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { CartContext } from '../context/cart-context';
 import { Route } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
-import { Container } from '@material-ui/core'
+import { Container } from '@material-ui/core';
 import Navbar from './Navbar';
 import Cart from './Cart';
 import ItemGenerator from './ItemGenerator';
 import ItemPage from './ItemPage';
-import Checkout from './Checkout'
-
+import Checkout from './Checkout';
+import { StripeProvider } from 'react-stripe-elements';
 
 import 'typeface-roboto';
 import './App.css';
@@ -33,32 +33,34 @@ const App = () => {
 	
 
 	return (
-		<div className={classes.body} >
-			<CartContext.Provider value={({cart, updateCart})} >
-				<Navbar/>
-				<Container className={classes.container} >
+		<StripeProvider apiKey="pk_test_9bOOBTZK3NSPutiIrXeRty8800jBF7EbxL" >
+			<div className={classes.body} >
+				<CartContext.Provider value={({cart, updateCart})} >
+					<Navbar/>
+					<Container className={classes.container} >
 
-					<Route exact path="/" >
-						<ItemGenerator/>
-					</Route>
+						<Route exact path="/" >
+							<ItemGenerator/>
+						</Route>
 
-					<Route path="/item/:id">
-						<ItemPage/>
-					</Route>
+						<Route path="/item/:id">
+							<ItemPage/>
+						</Route>
 
-					<Route path="/cart">
-						<Cart/>
-					</Route>
+						<Route path="/cart">
+							<Cart/>
+						</Route>
 
-					<Route path="/checkout">
-						<Checkout/>
-					</Route>
-					
-				</Container>
+						<Route path="/checkout">
+							<Checkout/>
+						</Route>
+						
+					</Container>
 
-			</CartContext.Provider>
+				</CartContext.Provider>
 
-		</div>
+			</div>
+		</StripeProvider>
 	);
 }
 
