@@ -1,4 +1,4 @@
 module.exports = {
-    stripe: 'some key here',
-    
+    stripe: 'sk_test_',
+
 }
