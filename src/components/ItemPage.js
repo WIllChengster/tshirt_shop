@@ -39,7 +39,7 @@ const ItemPage = (props) => {
     return(
         <Grid container >
             <Grid item xs={6} >
-                <img className={classes.w100} src={shirt.img} >
+                <img className={classes.w100} src={shirt.img} alt="t-shirt">
                 </img>
             </Grid>
             <Grid item xs={6} className={classes.buyOptions} >
@@ -47,7 +47,6 @@ const ItemPage = (props) => {
                     {shirt.name}
                 </Typography>
                 <div>
-                    {/* <Button variant="contained" color="primary" size="large" >Add to Cart</Button> */}
                     <AddToCartButton variant="contained" size="large" color="primary" item={shirt} />
                 </div>
             </Grid>

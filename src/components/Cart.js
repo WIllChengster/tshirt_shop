@@ -42,17 +42,20 @@ const Cart = () => {
 
     const classes = useStyles();
     const {cart, updateCart} = useContext(CartContext)
-    console.log(cart);
 
     let deleteItem = (index) => {
-        const cartClone = quantifiedCart(cart);
-        cartClone.splice(index, 1)
-        updateCart( cartClone )
+        debugger;
+        const cartClone = cart.slice();
+        cartClone.splice(index, 1);
+        console.log(cartClone)
+        updateCart( cartClone );
+
     }
 
     let quantifiedCart = (inputCart) => {
         const cartOutput = [];
         for(let i = 0; i < inputCart.length; i++){
+            debugger;
 
              if(cartOutput.length === 0){
                 cartOutput.push({
@@ -80,7 +83,6 @@ const Cart = () => {
             
         }
 
-        console.log(cartOutput)
         return cartOutput
     }
 
@@ -90,12 +92,12 @@ const Cart = () => {
         </Paper>
     
     let CartMap = quantifiedCart(cart).map( (item, index) => {
-
+        console.log(item);
         return(
-            <Paper evelation={3} key={index} className={classes.cartItem} > 
+            <Paper evelation={3} key={'cart_item' + index} className={classes.cartItem} > 
                 <Grid container >
                     <Grid item xs={3} >
-                        <img className={classes.pic} src={item.img} />
+                        <img className={classes.pic} src={item.img} alt="t-shirt"/>
                     </Grid>
                     <Grid item xs={9} className={classes.itemInfo} >
                         <Typography>{item.name}</Typography>
@@ -111,6 +113,8 @@ const Cart = () => {
             </Paper>
         )
     } )
+
+    console.log(quantifiedCart(cart));
     
     let UserCart = cart.length > 0 ? CartMap : EmptyCartComponent
 
