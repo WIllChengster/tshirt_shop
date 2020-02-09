@@ -37,14 +37,16 @@ const ItemPage = (props) => {
     }
 
     return(
-        <Grid container >
+        <Grid container spacing={2} >
             <Grid item xs={6} >
-                <img className={classes.w100} src={shirt.img} alt="t-shirt">
-                </img>
+                <img className={classes.w100} src={shirt.img} alt="t-shirt"/>
             </Grid>
             <Grid item xs={6} className={classes.buyOptions} >
                 <Typography variant="h4" >
                     {shirt.name}
+                </Typography>
+                <Typography varaint ="p">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex exercitationem eligendi enim magni? Amet, pariatur beatae nam assumenda accusamus, deserunt consequuntur provident eius, nisi deleniti tempore blanditiis sed debitis quis!
                 </Typography>
                 <div>
                     <AddToCartButton variant="contained" size="large" color="primary" item={shirt} />

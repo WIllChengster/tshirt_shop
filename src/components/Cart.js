@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/cart-context';
 import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
 
-import { Typography, Paper, Grid, IconButton } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete';
+import { Typography, Paper, Grid, IconButton, Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 
 
@@ -46,7 +47,6 @@ const Cart = () => {
     let deleteItem = (index) => {
         const cartClone = cart.slice();
         cartClone.splice(index, 1);
-        console.log(cartClone)
         updateCart( cartClone );
 
     }
@@ -89,7 +89,6 @@ const Cart = () => {
         </Paper>
     
     let CartMap = quantifiedCart(cart).map( (item, index) => {
-        console.log(item);
         return(
             <Paper evelation={3} key={'cart_item' + index} className={classes.cartItem} > 
                 <Grid container >
@@ -100,6 +99,7 @@ const Cart = () => {
                         <Typography>{item.name}</Typography>
                         <div className={classes.itemInfoButtons} >
                             <Typography variant="caption" >Quantity: {item.quantity} </Typography>
+                            <Button size="small" color="primary" component={Link} to={`/item/${item.id}`}>Product Page</Button>
                             <IconButton onClick={() => deleteItem(index)} >
                                 <DeleteIcon/>
                             </IconButton>
@@ -111,7 +111,6 @@ const Cart = () => {
         )
     } )
 
-    console.log(quantifiedCart(cart));
     
     let UserCart = cart.length > 0 ? CartMap : EmptyCartComponent
 
