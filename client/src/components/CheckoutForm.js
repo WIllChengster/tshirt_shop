@@ -12,7 +12,8 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const CheckoutForm = () => {
+const CheckoutForm = (props) => {
+    console.log(props);
     const classes = useStyles();
     const style = {
         base: {

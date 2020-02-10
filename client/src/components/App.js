@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CartContext } from '../context/cart-context';
 import { Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,10 +30,22 @@ const App = () => {
 
 	const [cart, updateCart] = useState([]);
 
-	
 
+    const [stripe, setStripe] = useState(null);
+
+    useEffect(() => {
+        if (window.Stripe) {
+            setStripe(window.Stripe('pk_test_9bOOBTZK3NSPutiIrXeRty8800jBF7EbxL'));
+        } else {
+            document.querySelector('#stripe-js').addEventListener('load', () => {
+                // Create Stripe instance once Stripe.js loads
+                setStripe(window.Stripe('pk_test_9bOOBTZK3NSPutiIrXeRty8800jBF7EbxL'));
+            });
+        }
+	}, [window.Stripe])
+	
 	return (
-		<StripeProvider apiKey="pk_test_9bOOBTZK3NSPutiIrXeRty8800jBF7EbxL" >
+		<StripeProvider stripe={stripe} >
 			<div className={classes.body} >
 				<CartContext.Provider value={({cart, updateCart})} >
 					<Navbar/>
