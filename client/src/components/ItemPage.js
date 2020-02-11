@@ -26,19 +26,11 @@ const ItemPage = (props) => {
     const classes = useStyles();
 
     useEffect( () => {
-        getShirtData();
-        axios.get('/test').then(res => {
-            console.log(res);
+        axios.post('/api/shirts/exact_id', {id: props.match.params.id}).then(res => {
+            setShirt(res.data)
+            
         })
-    })
-    
-    const getShirtData = () => {
-        for(let item of itemData){
-            if(item.id === Number(props.match.params.id)){
-                setShirt(item);
-            }
-        }
-    }
+    }, [shirt.shirt_id])
 
     return(
         <Grid container spacing={2} >

@@ -30,6 +30,7 @@ const ItemGenerator = (props) => {
     const classes = useStyles();
 
     let ItemGenerator = shirts.map((item, index) => {
+        console.log(item)
         return( 
             <Grid item xs={3} key={`shirt ${index}`}>
                 <Item shirtObj={item} />

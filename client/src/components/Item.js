@@ -27,7 +27,7 @@ const useStyles = makeStyles( theme => ({
 const Item = (props) => {
     const classes = useStyles();
     const redirectToItem = () => {
-        props.history.push(`/item/${props.shirtObj.id}`)
+        props.history.push(`/item/${props.shirtObj.shirt_id}`)
     }
     return(
             <Card className={classes.card} variant="outlined" >
