@@ -8,9 +8,7 @@ const db = require('./database.js');
 
 
 app.use(express.static(path.resolve(__dirname, 'client', 'build')));
-// app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'client', 'build'), 'index.html')
-// })
+app.use('/assets', express.static(path.resolve(__dirname, 'assets')))
 
 
 

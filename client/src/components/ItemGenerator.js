@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
 import Item from './Item'
 
-import tshirtData from '../itemData'
+import axios from 'axios';
 
 
 const useStyles = makeStyles(theme => ({
@@ -15,10 +15,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ItemGenerator = (props) => {
+
+
+    const [shirts, setShirts] = useState([])
+
+    useEffect( () => {
+        axios.get('/api/shirts/all').then(res => {
+            console.log(res.data);
+            setShirts(res.data)
+        })
+    }, [shirts.length])
+
     
     const classes = useStyles();
 
-    let ItemGenerator = tshirtData.map((item, index) => {
+    let ItemGenerator = shirts.map((item, index) => {
         return( 
             <Grid item xs={3} key={`shirt ${index}`}>
                 <Item shirtObj={item} />
