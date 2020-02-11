@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import { Paper } from '@material-ui/core';
-import { CardElement } from 'react-stripe-elements';
+import { CardElement, injectStripe, PaymentRequestButtonElement } from 'react-stripe-elements';
 
 
 const useStyles = makeStyles(theme => ({
@@ -13,7 +13,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const CheckoutForm = (props) => {
-    console.log(props);
+
+
+
     const classes = useStyles();
     const style = {
         base: {
@@ -30,10 +32,12 @@ const CheckoutForm = (props) => {
             iconColor: "#fa755a"
         }
     };
+
+    
     return (
         <Paper className={classes.root} >
             <CardElement style={style}/>
         </Paper>
     )
 }
-export default CheckoutForm
+export default injectStripe(CheckoutForm);

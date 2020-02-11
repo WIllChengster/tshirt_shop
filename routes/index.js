@@ -1,4 +1,4 @@
-const resolve = require('path');
+const {resolve} = require('path');
 
 module.exports = app => {
     app.use('/api', require('./api'))
