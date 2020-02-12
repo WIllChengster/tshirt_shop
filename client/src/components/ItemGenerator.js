@@ -11,17 +11,16 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         justifyContent: 'center',
+
     }
 }));
 
 const ItemGenerator = (props) => {
 
-
     const [shirts, setShirts] = useState([])
 
     useEffect( () => {
         axios.get('/api/shirts/all').then(res => {
-            console.log(res.data);
             setShirts(res.data)
         })
     }, [shirts.length])
@@ -30,9 +29,8 @@ const ItemGenerator = (props) => {
     const classes = useStyles();
 
     let ItemGenerator = shirts.map((item, index) => {
-        console.log(item)
         return( 
-            <Grid item xs={3} key={`shirt ${index}`}>
+            <Grid item key={`shirt ${index}`}>
                 <Item shirtObj={item} />
             </Grid>
         )

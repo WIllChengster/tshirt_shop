@@ -7,18 +7,21 @@ import AddToCourtButton from './AddToCartButton'
 
 const useStyles = makeStyles( theme => ({
     card: {
-        // maxWidth: 300,
+        minWidth: 200,
     },
     media: {
         height: 200,
         [theme.breakpoints.down('sm')]: {
-            height: 100
+            height: 200
         }
     },
     content: {
         [theme.breakpoints.down('sm')]: {
-            height: 100
+            height: 50
         }
+    },
+    rightAlign: {
+        textAlign: 'end'
     }
 }));
 
@@ -38,8 +41,8 @@ const Item = (props) => {
                     <Typography component="h3" >
                         {props.shirtObj.name}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" >
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, vel!
+                    <Typography variant="body2"component="p" >
+                        ${props.shirtObj.price}
                     </Typography>
                 </CardContent>
                 <CardActions>

@@ -70,7 +70,7 @@ const Cart = () => {
 
             let itemFound = false;
             for(let j = 0; j < cartOutput.length; j++){
-                if( inputCart[i].id === cartOutput[j].id ){
+                if( inputCart[i].shirt_id === cartOutput[j].shirt_id ){
                     cartOutput[j].quantity += 1;
                     itemFound = true
                     break;
@@ -105,7 +105,7 @@ const Cart = () => {
                         <Typography>{item.name}</Typography>
                         <div className={classes.itemInfoButtons} >
                             <Typography variant="caption" >Quantity: {item.quantity} </Typography>
-                            <Button size="small" color="primary" component={Link} to={`/item/${item.id}`}>Product Page</Button>
+                            <Button size="small" color="primary" component={Link} to={`/item/${item.shirt_id}`}>Product Page</Button>
                             <IconButton onClick={() => deleteItem(index)} >
                                 <DeleteIcon/>
                             </IconButton>

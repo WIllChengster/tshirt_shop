@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import itemData from '../itemData';
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
@@ -30,7 +29,7 @@ const ItemPage = (props) => {
             setShirt(res.data)
             
         })
-    }, [shirt.shirt_id])
+    }, [props.match.params.id])
 
     return(
         <Grid container spacing={2} >
