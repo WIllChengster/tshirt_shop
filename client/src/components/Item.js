@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
+import { formatPrice } from '../helpers/pricing';
 
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from '@material-ui/core';
 import AddToCourtButton from './AddToCartButton'
@@ -42,7 +43,7 @@ const Item = (props) => {
                         {props.shirtObj.name}
                     </Typography>
                     <Typography variant="body2"component="p" >
-                        ${props.shirtObj.price}
+                        ${formatPrice(props.shirtObj.price)}
                     </Typography>
                 </CardContent>
                 <CardActions>

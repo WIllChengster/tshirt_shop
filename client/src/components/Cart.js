@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/cart-context';
 import { makeStyles } from '@material-ui/core/styles';
+import { formatPrice } from '../helpers/pricing';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Typography, Paper, Grid, IconButton, Button } from '@material-ui/core'
@@ -42,6 +43,11 @@ const useStyles = makeStyles( theme => ({
     checkoutButton: {
         backgroundColor: 'green',
         margin: 'auto',
+        display: 'block'
+    },
+    checkoutComponent: {
+        margin: 'auto',
+        textAlign:'center'
     }
 }))
 
@@ -103,6 +109,7 @@ const Cart = () => {
                     </Grid>
                     <Grid item xs={9} className={classes.itemInfo} >
                         <Typography>{item.name}</Typography>
+                        <Typography>${formatPrice(item.price)} </Typography>
                         <div className={classes.itemInfoButtons} >
                             <Typography variant="caption" >Quantity: {item.quantity} </Typography>
                             <Button size="small" color="primary" component={Link} to={`/item/${item.shirt_id}`}>Product Page</Button>
@@ -117,8 +124,21 @@ const Cart = () => {
         )
     } )
 
-    
-    let CheckoutButton = cart.length > 0 ? <Button className={classes.checkoutButton} component={Link} to="/checkout" variant="contained" size="large" color="primary" >Checkout</Button> : <div/>
+    const getSubtotal = (cart) => {
+        let total = 0;
+        for( let i = 0; i<cart.length; i++){
+            total += cart[i].price
+        }
+        return formatPrice(total)
+    }
+
+    let checkoutComponent = <div className={classes.checkoutComponent} >
+        <Typography>
+            Subtotal ({ cart.length } item{cart.length === 1 ? '': 's'}): ${getSubtotal(cart)}
+        </Typography>
+        <Button className={classes.checkoutButton} component={Link} to="/checkout" variant="contained" size="large" color="primary" >Checkout</Button>
+    </div>
+    let CheckoutButton = cart.length > 0 ? checkoutComponent : <div/>
 
     let UserCart = cart.length > 0 ? CartMap : EmptyCartComponent
 

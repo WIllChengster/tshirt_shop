@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { formatPrice } from '../helpers/pricing'
 import axios from 'axios'
 
 import { Grid, Typography } from '@material-ui/core';
@@ -42,6 +43,9 @@ const ItemPage = (props) => {
                 </Typography>
                 <Typography varaint ="p">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex exercitationem eligendi enim magni? Amet, pariatur beatae nam assumenda accusamus, deserunt consequuntur provident eius, nisi deleniti tempore blanditiis sed debitis quis!
+                </Typography>
+                <Typography variant="h5" >
+                    ${typeof(shirt.price) !== 'undefined'? formatPrice(shirt.price): ''}
                 </Typography>
                 <div>
                     <AddToCartButton variant="contained" size="large" color="primary" item={shirt} />
