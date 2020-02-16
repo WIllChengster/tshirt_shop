@@ -3,21 +3,22 @@ const keys = require('../../keys.js');
 const stripe = require('stripe')(keys.stripe);
 
 
-router.post('/request', (req, res) => {
-    var paymentRequest = stripe.paymentRequest({
-        country: 'US',
-        currency: 'usd',
-        total: {
-          label: 'Demo total',
-          amount: 1000,
-        },
-        requestPayerName: true,
-        requestPayerEmail: true,
-      });
+router.post('/paymentIntent', (req, res) => {
+	(async () => {
+		const { cart } = req.body
+		let total = 0;
+		for( let i = 0; i < cart.length; i++){
+			total += cart[i].price
+		}
 
-    //   paymentRequest.canMakePayment().then(result => {
-    //     console.log(result);
-    //   })
+		const paymentIntent = await stripe.paymentIntents.create({
+			amount: total,
+			currency: 'usd',
+		});
+		console.log(paymentIntent)
+		res.send(paymentIntent.client_secret)
+	})();
+
 
 })
 
