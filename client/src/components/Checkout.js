@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Elements } from 'react-stripe-elements';
 import { Redirect } from 'react-router-dom';
 import { CartContext } from '../context/cart-context'
