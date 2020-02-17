@@ -96,7 +96,7 @@ const CheckoutForm = (props) => {
     const [error, setError] = useState('')
     const [shipping, setShipping] = useState({
         street: '',
-        zip: '',
+        postal_code: '',
         city: '',
         country: '',
         phone: '',
@@ -151,10 +151,18 @@ const CheckoutForm = (props) => {
         })
     }
     const handleCountry = (value) => {
-        setShipping({
-            ...shipping,
-            country: value.label
-        })
+        if(!value){
+            setShipping({
+                ...shipping, 
+                country: ''
+            })
+        } else {
+            setShipping({
+                ...shipping,
+                country: value.label
+            })
+        }
+
 
     }
     console.log(shipping);
@@ -176,7 +184,7 @@ const CheckoutForm = (props) => {
 
                 <div className={`${classes.inputContainer}`} >
                     <TextField onChange={(e) => handleShipping(e)} value={shipping.street} id="street" label="Street Address" required />
-                    <TextField onChange={(e) => handleShipping(e)} value={shipping.zip} id="postal_code" label="Postal Code" type="number" required />
+                    <TextField onChange={(e) => handleShipping(e)} value={shipping.postal_code} id="postal_code" label="Postal Code" type="number" required />
                     <TextField onChange={(e) => handleShipping(e)} value={shipping.city} id="city" label="City" required />
                     <CountrySelector changeMethod={(val) => handleCountry(val)} value={shipping.country} id="country" required />
                     <TextField onChange={(e) => handleShipping(e)} value={shipping.phone} id="phone" label="Phone Number" type="number" required />

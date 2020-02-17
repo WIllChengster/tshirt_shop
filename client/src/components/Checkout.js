@@ -9,7 +9,7 @@ const Checkout = () => {
     const {cart} = useContext(CartContext)
 
     if(!cart.length){
-        // return(<Redirect to="/cart"/>)
+        return(<Redirect to="/cart"/>)
     }
 
     return (
