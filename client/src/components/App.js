@@ -42,7 +42,7 @@ const App = () => {
                 setStripe(window.Stripe('pk_test_9bOOBTZK3NSPutiIrXeRty8800jBF7EbxL'));
             });
         }
-	}, [window.Stripe])
+	}, [])
 	
 	return (
 		<StripeProvider stripe={stripe} >

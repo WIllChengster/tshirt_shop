@@ -3,23 +3,29 @@ import { CartContext } from '../context/cart-context';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { formatPrice } from '../helpers/pricing';
-
-import { Paper, Button, Typography, CircularProgress } from '@material-ui/core';
+import CountrySelector from './countrySelector';
+import { Button, Typography, CircularProgress, TextField } from '@material-ui/core';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 
+import { green } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        width: '70%',
-        margin: 'auto',
-        padding: theme.spacing(6),
-    }, 
     margins: {
-        marginTop: theme.spacing(6),
-        marginBottom: theme.spacing(6),
-    }, 
+        // margin: theme.spacing(2)
+        '& > *': {
+            margin: theme.spacing(2.5),
+        }
+    },
     formContainer: {
-        position:'relative'
+        position: 'relative',
+        [theme.breakpoints.up('sm')]: {
+            backgroundColor: 'white',
+            width: '70%',
+            padding: theme.spacing(6),
+            margin: 'auto',
+            boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
+            borderRadius: '4px',
+        }
     },
     spinnerContainer: {
         width: '100%',
@@ -35,8 +41,36 @@ const useStyles = makeStyles(theme => ({
     },
     nospinner: {
         display: 'none',
+    },
+    button: {
+        backgroundColor: green[500],
+        display: 'block',
+        margin: `${theme.spacing(3)}px 0 0 auto`,
+        // marginTop: theme.spacing(3),
+        [theme.breakpoints.down('xs')]: {
+            margin: 'auto',
+            marginTop: theme.spacing(3),
+
+        },
+
+    },
+    inputContainer: {
+        '& > *': {
+            margin: theme.spacing(2.5),
+            width: 150,
+        },
+        // display: 'flex',
+        [theme.breakpoints.down('xs')]: {
+
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            // alignItems: 'center',
+            // flexDirection: 'column'
+        }
     }
 }))
+
 const style = {
     base: {
         color: "#32325d",
@@ -45,7 +79,7 @@ const style = {
         fontSize: "16px",
         "::placeholder": {
             color: "#aab7c4"
-        }
+        },
     },
     invalid: {
         color: "#fa755a",
@@ -54,26 +88,44 @@ const style = {
 
 };
 
+
 const CheckoutForm = (props) => {
     const classes = useStyles();
-    const {cart} = useContext(CartContext)
+    const { cart } = useContext(CartContext)
     const [loading, toggleLoading] = useState(false)
     const [error, setError] = useState('')
+    const [shipping, setShipping] = useState({
+        street: '',
+        zip: '',
+        city: '',
+        country: '',
+        phone: '',
+    })
 
     const handleSubmit = (event) => {
+
         event.preventDefault();
-        console.log('submitting...')
+        console.log('submitting...');
         toggleLoading(true)
-        axios.post('/api/payments/paymentIntent', {cart: cart}).then(res => {
+        axios.post('/api/payments/paymentIntent', { cart: cart }).then(res => {
             props.stripe.confirmCardPayment(res.data, {
                 payment_method: {
                     card: props.elements.getElement('card'),
                     billing_details: {
                         name: 'Jane Doe',
+                        address: {
+                            city: null,
+                            country: null,
+                            line1: null,
+                            line2: null,
+                            postal_code: "42424",
+                            state: null
+                        },
                     },
-                }
-            }).then( result => {
-                if(result.error){
+                },
+
+            }).then(result => {
+                if (result.error) {
                     setError(result.error.message);
                 } else {
                     setError('');
@@ -85,30 +137,59 @@ const CheckoutForm = (props) => {
     }
     const getSubtotal = (cart) => {
         let total = 0;
-        for( let i = 0; i<cart.length; i++){
+        for (let i = 0; i < cart.length; i++) {
             total += cart[i].price
         }
         return formatPrice(total)
     }
-    return (
-        <Paper className={classes.root} >
-            <Typography>
-                Subtotal ({ cart.length } item{cart.length === 1 ? '': 's'}): ${getSubtotal(cart)}
-            </Typography>
-            <div className={classes.formContainer} >
-                <form className={ (loading) ? classes.formDim : ''} onSubmit={handleSubmit} >
-                    <div className={classes.margins}>
-                        <CardElement  style={style} />
-                        <Typography variant="subtitle1" color="error">{error}</Typography>
-                    </div>
-                    <Button variant="contained" type="submit" >Submit</Button>
-                </form>
-                <div className={loading ? classes.spinnerContainer: classes.nospinner} >
-                    <CircularProgress/>
-                </div>
-            </div>
 
-        </Paper>
+    const handleShipping = (event) => {
+        console.log(event.target.value);
+        setShipping({
+            ...shipping,
+            [event.target.id]: event.target.value
+        })
+    }
+    const handleCountry = (value) => {
+        setShipping({
+            ...shipping,
+            country: value.label
+        })
+
+    }
+    console.log(shipping);
+    return (
+        <div className={classes.formContainer} >
+
+            <form className={loading ? classes.formDim : ''} onSubmit={handleSubmit} >
+                <Typography>Billing Details</Typography>
+
+                <div className={classes.margins}>
+                    <Typography>
+                        Subtotal ({cart.length} item{cart.length === 1 ? '' : 's'}): ${getSubtotal(cart)}
+                    </Typography>
+                    <CardElement style={style} />
+                    <Typography variant="subtitle1" color="error">{error}</Typography>
+                </div>
+
+                <Typography>Shipping Address</Typography>
+
+                <div className={`${classes.inputContainer}`} >
+                    <TextField onChange={(e) => handleShipping(e)} value={shipping.street} id="street" label="Street Address" required />
+                    <TextField onChange={(e) => handleShipping(e)} value={shipping.zip} id="postal_code" label="Postal Code" type="number" required />
+                    <TextField onChange={(e) => handleShipping(e)} value={shipping.city} id="city" label="City" required />
+                    <CountrySelector changeMethod={(val) => handleCountry(val)} value={shipping.country} id="country" required />
+                    <TextField onChange={(e) => handleShipping(e)} value={shipping.phone} id="phone" label="Phone Number" type="number" required />
+                </div>
+
+
+                <Button className={classes.button} variant="contained" type="submit" >Complete Purchase</Button>
+            </form>
+            <div className={loading ? classes.spinnerContainer : classes.nospinner} >
+                <CircularProgress />
+            </div>
+        </div>
+
     )
 }
 export default injectStripe(CheckoutForm);
