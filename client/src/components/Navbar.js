@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
-import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemText } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, SwipeableDrawer, List, ListItem, ListItemText } from '@material-ui/core';
 import ContextCartButton from './ContextCartButton'
 
 const useStyles = makeStyles(theme => ({
@@ -29,15 +29,16 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Navbar = (props) => {
-
+    const history = useHistory();
     const classes = useStyles();
-    const redirect = (route) => props.history.push(route)
+    const redirect = (route) => history.push(route)
     const [drawer, setDrawer] = useState(false)
 
     const toggleDrawer = (state) => event => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
-        }
+          }
+      
 
         setDrawer(state);
     };
@@ -45,7 +46,7 @@ const Navbar = (props) => {
     return (
         <AppBar position="static" >
             <Toolbar>
-                <Drawer open={drawer} onClose={toggleDrawer(false)} >
+                <SwipeableDrawer open={drawer} onClose={toggleDrawer(false)}         onOpen={toggleDrawer(true)}>
                     <div
                         className={classes.list}
                         role="presentation"
@@ -54,11 +55,12 @@ const Navbar = (props) => {
                     >
                         <List>
                             <ListItem button key={'account'}>
-                                <ListItemText primary={'account'} />
+                                
+                                <ListItemText primary={'Sign in'} onClick={() => redirect('/signup')}/>
                             </ListItem>
                         </List>
                     </div>
-                </Drawer>
+                </SwipeableDrawer>
                 <IconButton className={classes.icon} onClick={toggleDrawer(true)} >
                     <MenuIcon />
                 </IconButton>
@@ -72,4 +74,4 @@ const Navbar = (props) => {
     )
 }
 
-export default withRouter(Navbar);
+export default Navbar;
