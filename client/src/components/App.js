@@ -9,6 +9,7 @@ import Cart from './Cart';
 import ItemGenerator from './ItemGenerator';
 import ItemPage from './ItemPage';
 import Checkout from './Checkout';
+import CompleteCheckout from './CompleteCheckout';
 import { StripeProvider } from 'react-stripe-elements';
 
 import 'typeface-roboto';
@@ -65,6 +66,10 @@ const App = () => {
 
 						<Route path="/checkout">
 							<Checkout/>
+						</Route>
+
+						<Route path="/complete_checkout" >
+							<CompleteCheckout/>
 						</Route>
 						
 					</Container>

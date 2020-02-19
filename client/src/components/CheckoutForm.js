@@ -6,12 +6,11 @@ import { formatPrice } from '../helpers/pricing';
 import CountrySelector from './countrySelector';
 import { Button, Typography, CircularProgress, TextField } from '@material-ui/core';
 import { CardElement, injectStripe } from 'react-stripe-elements';
-
+import { useHistory } from 'react-router-dom'
 import { green } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
     margins: {
-        // margin: theme.spacing(2)
         '& > *': {
             margin: theme.spacing(2.5),
         }
@@ -90,6 +89,7 @@ const style = {
 
 
 const CheckoutForm = (props) => {
+    const history = useHistory();
     const classes = useStyles();
     const { cart } = useContext(CartContext)
     const [loading, toggleLoading] = useState(false)
@@ -127,11 +127,12 @@ const CheckoutForm = (props) => {
             }).then(result => {
                 if (result.error) {
                     setError(result.error.message);
+                    toggleLoading(false)
                 } else {
+                    // not toggling loading on success b/c memory leak
                     setError('');
-                    console.log(result.paymentIntent)
+                    history.push('/complete_checkout')
                 }
-                toggleLoading(false)
             })
         })
     }
@@ -189,8 +190,6 @@ const CheckoutForm = (props) => {
                     <CountrySelector changeMethod={(val) => handleCountry(val)} value={shipping.country} id="country" required />
                     <TextField onChange={(e) => handleShipping(e)} value={shipping.phone} id="phone" label="Phone Number" type="number" required />
                 </div>
-
-
                 <Button className={classes.button} variant="contained" type="submit" >Complete Purchase</Button>
             </form>
             <div className={loading ? classes.spinnerContainer : classes.nospinner} >
