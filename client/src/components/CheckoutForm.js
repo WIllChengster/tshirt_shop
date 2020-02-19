@@ -91,7 +91,7 @@ const style = {
 const CheckoutForm = (props) => {
     const history = useHistory();
     const classes = useStyles();
-    const { cart } = useContext(CartContext)
+    const { cart, setCart } = useContext(CartContext)
     const [loading, toggleLoading] = useState(false)
     const [error, setError] = useState('')
     const [shipping, setShipping] = useState({
@@ -130,6 +130,9 @@ const CheckoutForm = (props) => {
                     toggleLoading(false)
                 } else {
                     // not toggling loading on success b/c memory leak
+                    axios.post(() => {
+                        
+                    })
                     setError('');
                     history.push('/complete_checkout')
                 }

@@ -15,11 +15,12 @@ router.post('/paymentIntent', (req, res) => {
 			amount: total,
 			currency: 'usd',
 		});
-		console.log(paymentIntent)
 		res.send(paymentIntent.client_secret)
 	})();
+})
 
-
+router.post('/completePurchase', (req, res) => {
+	console.log(req.body)
 })
 
 
