@@ -12,6 +12,7 @@ import Checkout from './Checkout';
 import CompleteCheckout from './CompleteCheckout';
 import Registration from './Registration';
 import { StripeProvider } from 'react-stripe-elements';
+import { useCookies } from 'react-cookie';
 
 import 'typeface-roboto';
 import './App.css';
@@ -31,6 +32,7 @@ const App = () => {
 	const classes = useStyles();
 
 	const [cart, updateCart] = useState([]);
+	const [cookie, setCookie] = useCookies(['cookie-cart'])
 
 
     const [stripe, setStripe] = useState(null);
@@ -44,10 +46,23 @@ const App = () => {
                 setStripe(window.Stripe('pk_test_9bOOBTZK3NSPutiIrXeRty8800jBF7EbxL'));
             });
         }
-	}, [])
+	}, []);
+
+	useEffect( () => {
+		if(cart.length === 0){
+			updateCart(cookie['cookie-cart'])
+		} 
+		console.log('set cookie')
+	}, []);
+
+	useEffect( () => {
+		setCookie('cookie-cart', cart)
+	},[cart.length])
+
 	
 	return (
 		<StripeProvider stripe={stripe} >
+		
 			<div className={classes.body} >
 				<CartContext.Provider value={({cart, updateCart})} >
 					<Navbar/>
