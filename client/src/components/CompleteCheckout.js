@@ -41,7 +41,6 @@ const CompleteCheckout = () => {
 
 
     useEffect(() => {
-        console.log('update cart')
         updateCart([])
     }, [])
 

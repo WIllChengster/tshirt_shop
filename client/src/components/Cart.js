@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { CartContext } from '../context/cart-context';
 import { makeStyles } from '@material-ui/core/styles';
 import { formatPrice, getSubtotal } from '../helpers/pricing';
-import quantifiedCart from '../helpers/quantifyCart'
+import quantifiedCart from '../helpers/quantifyCart';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Typography, Paper, Grid, IconButton, Button } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { Typography, Paper, Grid, IconButton, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 
 
