@@ -9,5 +9,4 @@ router.get('/test', (req, res) => {
 router.use('/shirts', require('./shirts.js'))
 router.use('/payments', require('./payments.js'))
 
-
 module.exports = router

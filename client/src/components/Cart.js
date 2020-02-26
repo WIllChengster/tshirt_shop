@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/cart-context';
 import { makeStyles } from '@material-ui/core/styles';
-import { formatPrice } from '../helpers/pricing';
-
+import { formatPrice, getSubtotal } from '../helpers/pricing';
+import quantifiedCart from '../helpers/quantifyCart'
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Typography, Paper, Grid, IconButton, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
@@ -63,41 +63,12 @@ const Cart = () => {
 
     }
 
-    let quantifiedCart = (inputCart) => {
-        const cartOutput = [];
-        for(let i = 0; i < inputCart.length; i++){
-             if(cartOutput.length === 0){
-                cartOutput.push({
-                    ...inputCart[i],
-                    quantity: 1,
-                })
-                continue;
-            }
 
-            let itemFound = false;
-            for(let j = 0; j < cartOutput.length; j++){
-                if( inputCart[i].shirt_id === cartOutput[j].shirt_id ){
-                    cartOutput[j].quantity += 1;
-                    itemFound = true
-                    break;
-                }
-            }
-
-            if( !itemFound ) {
-                cartOutput.push({
-                    ...inputCart[i],
-                    quantity: 1,
-                })
-            }
-            
-        }
-
-        return cartOutput
-    }
 
     let EmptyCartComponent = <Paper elevation={3} className={classes.cartItem}  >
             <Typography>Your Cart is empty</Typography>
-            <Typography>Start Shopping!</Typography>
+            <Button variant="contained" component={Link} to="/" >Start Shopping</Button>
+            {/* <Typography>Start Shopping!</Typography> */}
         </Paper>
     
     let CartMap = quantifiedCart(cart).map( (item, index) => {
@@ -124,13 +95,6 @@ const Cart = () => {
         )
     } )
 
-    const getSubtotal = (cart) => {
-        let total = 0;
-        for( let i = 0; i<cart.length; i++){
-            total += cart[i].price
-        }
-        return formatPrice(total)
-    }
 
     let checkoutComponent = <div className={classes.checkoutComponent} >
         <Typography>
