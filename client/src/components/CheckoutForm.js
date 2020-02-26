@@ -8,6 +8,7 @@ import { Button, Typography, CircularProgress, TextField } from '@material-ui/co
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { useHistory } from 'react-router-dom'
 import { green } from '@material-ui/core/colors';
+import { useCookies } from 'react-cookie'
 
 const useStyles = makeStyles(theme => ({
     margins: {
@@ -89,6 +90,7 @@ const style = {
 
 
 const CheckoutForm = (props) => {
+    const [cookie, setCookie] = useCookies(['checkoutCart'])
     const history = useHistory();
     const classes = useStyles();
     const { cart, setCart } = useContext(CartContext)
@@ -129,11 +131,8 @@ const CheckoutForm = (props) => {
                     setError(result.error.message);
                     toggleLoading(false)
                 } else {
-                    // not toggling loading on success b/c memory leak
-                    axios.post(() => {
-                        
-                    })
                     setError('');
+                    setCookie('checkoutCart', cart)
                     history.push('/complete_checkout')
                 }
             })
