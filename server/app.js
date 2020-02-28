@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const keys = require('./keys')
 
-app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+app.use(express.static(path.resolve(__dirname, '..', 'react', 'build')));
 app.use('/assets', express.static(path.resolve(__dirname, 'assets')))
 
 app.use(bodyParser.json())

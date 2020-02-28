@@ -154,9 +154,9 @@ const CheckoutForm = (props) => {
         })
     }
     const handleCountry = (value) => {
-        if(!value){
+        if (!value) {
             setShipping({
-                ...shipping, 
+                ...shipping,
                 country: ''
             })
         } else {
@@ -168,19 +168,32 @@ const CheckoutForm = (props) => {
 
 
     }
+
+    const stripeHandle = (e) => {
+        console.log(e)
+    }
     console.log(shipping);
+
     return (
         <div className={classes.formContainer} >
 
             <form className={loading ? classes.formDim : ''} onSubmit={handleSubmit} >
                 <Typography>Billing Details</Typography>
-
+                <Typography variant="subtitle2" >
+                    You can copy and paste the following test cards to trigger different scenarios:
+                </Typography>
+                <Typography variant="subtitle2">Default US card:	4242 4242 4242 4242</Typography>
+                <Typography variant="subtitle2">Authentication required:	4000 0027 6000 3184</Typography>
+                <Typography variant="subtitle2" >
+                    exp, cvc, and zip can be anything
+                </Typography>
                 <div className={classes.margins}>
                     <Typography>
                         Subtotal ({cart.length} item{cart.length === 1 ? '' : 's'}): ${getSubtotal(cart)}
                     </Typography>
-                    <CardElement style={style} />
+                    <CardElement onChange={stripeHandle} style={style} />
                     <Typography variant="subtitle1" color="error">{error}</Typography>
+
                 </div>
 
                 <Typography>Shipping Address</Typography>
