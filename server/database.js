@@ -1,15 +1,16 @@
 const mysql = require('mysql');
+const keys = require('./keys')
 let con;
 
 const connectDatabase = () => {
 
     if(!con){
         con = mysql.createPool({
-            host: "mysql",
-            user: "root",
-            password: "rootpassword",
-            port: 3306,
-            database: 'tshirt_shop'
+            host: keys.mysql.host,
+            user: keys.mysql.user,
+            password: keys.mysql.password,
+            port: keys.mysql.port,
+            database: keys.mysql.database
         });
 
         con.getConnection( (err, connection) => {
