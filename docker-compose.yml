@@ -4,7 +4,7 @@ services:
 
   server:
     build:
-      context: './'
+      context: './server'
     networks: 
       - backend
     ports: 
@@ -16,7 +16,7 @@ services:
 
   react:
     build:
-      context: './client/'
+      context: './server/react'
     networks: 
       - backend
     ports: 
@@ -28,11 +28,19 @@ services:
 
   mysql:
     image: mysql:5.6.40
+    ports: 
+      - 9000:9000
     networks:
       - backend
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=root
+      - MYSQL_HOST=localhost
+      - MYSQL_PASSWORD=rootpassword
+      - MYSQL_DATABASE=tshirt_shop
     container_name: mysql
+    expose:
+      - 9000
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -50,7 +58,7 @@ services:
     container_name: phpmyadmin
       
 networks:
-  frontend:
-    driver: bridge
+  # frontend:
+  #   driver: bridge
   backend:
     driver: bridge

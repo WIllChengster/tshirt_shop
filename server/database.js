@@ -5,10 +5,10 @@ const connectDatabase = () => {
 
     if(!con){
         con = mysql.createPool({
-            host: "localhost",
+            host: "mysql",
             user: "root",
-            password: "root",
-            port: 8889,
+            password: "rootpassword",
+            port: 3306,
             database: 'tshirt_shop'
         });
 
