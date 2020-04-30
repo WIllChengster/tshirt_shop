@@ -7,6 +7,7 @@ This application is an ecommerce showcase designed for my portfolio and mainly f
 1. axios
 1. Express
 1. MySQL
+1. Docker/Docker-Compose
 
 ## How to run this application
 
